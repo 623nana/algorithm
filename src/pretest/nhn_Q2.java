@@ -4,18 +4,19 @@ import java.io.*;
 import java.util.*;
 
 public class nhn_Q2 {
-    static final int[] dCol = {-1, 0, 1, 0};
-    static final int[] dRow = {0, 1, 0, -1};
-    static int N;
+
+    static int N, cnt, ax, ay;
+    static int map[][];
+    static int dx[] = {1, -1, 0, 0};
+    static int dy[] = {0, 0, 1, -1};
+
     public static void main(String [] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
+
         N = Integer.parseInt(br.readLine());
-
         ArrayList<Integer> list = new ArrayList<Integer>();
-
-        int[][] map = new int[N][N];
-        boolean[][] check = new boolean[N][N];
+        map = new int[N][N];
 
         for(int i = 0; i<N; i++){
             st = new StringTokenizer(br.readLine());
@@ -25,19 +26,19 @@ public class nhn_Q2 {
         }
 
         int name = 0;
-
         for(int i = 0; i<N; i++){
             for(int j = 0; j<N; j++){
-                if(!check[i][j] && map[i][j]!=0){
+                if(map[i][j]!=0){
                     name++;
-                    int cnt = dfs(i, j, name, 0, check, map);
-                    list.add(cnt);
+                    cnt = 0;
+                    int a = dfs(i, j, name);
+                    list.add(a);
                 }
             }
         }
 
         if(list.size() == 0){
-            System.out.print(name);
+            System.out.println(name);
         } else {
             Collections.sort(list);
             System.out.print(name + "\n");
@@ -51,21 +52,18 @@ public class nhn_Q2 {
         }
     }
 
-    static int dfs(int dx, int dy, int name, int cnt, boolean[][] check, int[][] map){
+    static int dfs(int x, int y, int name){
         cnt++;
-        check[dx][dy] = true;
-
+        map[x][y] = 0;
         for(int i = 0; i<4; i++){
-            int nextRow =  dx + dRow[i];
-            int nextCol = dy + dCol[i];
-
-            if(nextRow < 0 || nextRow >= N || nextCol < 0 || nextCol >= N) continue;
-            if(map[nextRow][nextCol] == 0) continue;
-            if(check[nextRow][nextCol]) continue;
-
-            cnt = dfs(nextRow, nextCol, name, cnt, check, map);
+            ax = x + dx[i];
+            ay = y + dy[i];
+            if(ax>=0 && ay>=0 && ax<N && ay<N) {
+                if (map[ax][ay] == 1) {
+                    dfs(ax, ay, name);
+                }
+            }
         }
-
         return cnt;
     }
 }
