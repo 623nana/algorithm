@@ -3,31 +3,35 @@ package pretest;
 import java.io.*;
 import java.util.*;
 
+/* 2018-09-28 */
+
 public class nhn_Q1 {
     public static void main(String [] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Queue<Integer> q = new LinkedList<Integer>();
+
+        /* 두번째 자리에 있는 수가 들어올 경우 예외 발생하기 때문에 큐 사용 X */
+        ArrayList<Integer> list = new ArrayList<>();
+        //유용..가운데 구분해주는거임..
+        StringJoiner rslt = new StringJoiner("\n");
+
         String[] input = br.readLine().split(" ");
 
-        //int[] input = {1, 2, 3, 1, 2, 3, 1, 2, 3};
-        int cnt = 0;
-        for(int i = 0; i<input.length; i++){
-            if(q.size() != 3){
-                q.offer(Integer.parseInt(input[i]));
+        for(String s : input){
+            if(list.size() != 3){
+                list.add(Integer.parseInt(s));
             } else {
-                if(q.peek() == Integer.parseInt(input[i])){
-                    q.poll();
-                    q.offer(Integer.parseInt(input[i]));
+                if(list.contains(Integer.parseInt(s))){
+                    list.remove(Integer.valueOf(Integer.parseInt(s)));
+                    list.add(Integer.parseInt(s));
                 } else {
-                    cnt++;
-                    System.out.print(q.poll() + "\n");
-                    q.offer(Integer.parseInt(input[i]));
+                    rslt.add(String.valueOf(list.get(0)));
+                    list.remove(0);
+                    list.add(Integer.parseInt(s));
                 }
             }
         }
-        if(cnt == 0){
-            System.out.print(0);
-        }
+
+        System.out.println(rslt.length() == 0 ? 0 : rslt.toString());
     }
 }
