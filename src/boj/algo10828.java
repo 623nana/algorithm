@@ -1,4 +1,4 @@
-
+package boj;
 /* 2018-09-04 */
 
 import java.util.Scanner;
@@ -9,9 +9,10 @@ public class algo10828 {
         Scanner scan = new Scanner(System.in);
 
         int n = scan.nextInt();
-        scan.nextLine();
-        Stack<Integer> stack = new Stack<Integer>();
 
+        scan.nextLine();
+
+        Stack<Integer> stack = new Stack<Integer>();
         for(int i = 0 ; i < n; i++){
             String str = scan.nextLine();
 
