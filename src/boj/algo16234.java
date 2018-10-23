@@ -8,6 +8,12 @@ import java.util.Scanner;
 *   종료 조건이 집에와서 보니 좀 다르게 짠 것 같다..ㅜ
 *   일단 테케 맞기는 했는데 설마 이거 때문에 걸리면 어떡하지-ㅅ-;;
 * */
+/* 2018-10-23 */
+/*
+*   dfs를 두번 돌릴 필요가 없었다. 그냥 일단 들어가보고 범위에 있으면
+*   리스트에 추가해서 fill로 채워주면 됐음.
+*   사실 시간차이는 얼마 안나는데 메모리 차이가 좀 있는 것 같다.
+* */
 public class algo16234 {
     static int N;
     static int L;
@@ -40,6 +46,7 @@ public class algo16234 {
         while(check == false){
             // 1. 체크
             stop = new int[N][N];
+//            check(0, 0);
             for(int i = 0; i<N; i++){
                 for(int j = 0; j<N; j++){
                     if(stop[i][j] == 0){
@@ -69,21 +76,25 @@ public class algo16234 {
             for(int i = 0; i<N; i++){
                 for(int j = 0; j<N; j++){
                     if(!visited[i][j]){
-                        t++;
-                        dfs(i, j, t);
-                    }
-                }
-            }
-            visited = new boolean[N][N];
-            for(int i = 0; i<N; i++){
-                for(int j = 0; j<N; j++){
-                    if(!visited[i][j]){
                         list = new ArrayList<>();
+//                        t++;
+//                        dfs(i, j, t);
                         sDfs(i, j);
                         fill(list);
                     }
                 }
             }
+
+//            visited = new boolean[N][N];
+//            for(int i = 0; i<N; i++){
+//                for(int j = 0; j<N; j++){
+//                    if(!visited[i][j]){
+//                        list = new ArrayList<>();
+//                        sDfs(i, j);
+//                        fill(list);
+//                    }
+//                }
+//            }
             time++;
         }
 
@@ -135,7 +146,8 @@ public class algo16234 {
             int ny = y + dy[i];
             if(nx>=0 && ny>=0 && nx<N && ny<N){
                 if(!visited[nx][ny]){
-                    if(arr[x][y] == arr[nx][ny]){
+//                    if(arr[x][y] == arr[nx][ny]){
+                    if (Math.abs(map[x][y] - map[nx][ny]) >= L && Math.abs(map[x][y] - map[nx][ny]) <= R) {
                         list.add(new Dot(nx, ny));
                         visited[nx][ny] = true;
                         sDfs(nx, ny);
