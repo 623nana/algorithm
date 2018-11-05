@@ -1,2 +1,2 @@
-#Algorithm
+# Algorithm
 Problem solving with algorithms 
