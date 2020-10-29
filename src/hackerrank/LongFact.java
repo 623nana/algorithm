@@ -1,3 +1,5 @@
+package hackerrank;
+
 import java.math.BigInteger;
 
 /* 2020-10-28 */
