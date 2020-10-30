@@ -1,18 +1,18 @@
 package programmers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NumK {
     public static void main(String[] args) {
-        System.out.println(solution(new int[]{1, 5, 2, 6, 3, 7, 4}, new int[][]{{2, 5, 3}, {4, 4, 1}, {1, 7, 3}}));
+
     }
     public static int[] solution(int[] array, int[][] commands) {
         int[] answer = new int[commands.length];
         for(int i = 0; i<commands.length; i++) {
-            int[] newArr = Arrays.copyOfRange(array, commands[i][0], commands[i][1]);
+            // Arrays.copyOfRange <- 배열 인덱스 만큼 새로운 배열에 복사
+            int[] newArr = Arrays.copyOfRange(array, commands[i][0]-1, commands[i][1]);
             Arrays.sort(newArr);
-            System.out.println(newArr);
+            answer[i] = newArr[commands[i][2]-1];
         }
         return answer;
     }
