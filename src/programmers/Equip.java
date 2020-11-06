@@ -25,7 +25,8 @@ public class Equip {
       );
     }
 
-    //맨 처음 값
+    // 맨 처음 값
+    // poll() 요소 꺼내서 반환, peek() 삭제 없이 읽어오기만
     int prevFunc = q.poll();
     int funcs = 1;
 
