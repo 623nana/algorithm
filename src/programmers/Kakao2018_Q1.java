@@ -32,8 +32,9 @@ public class Kakao2018_Q1 {
       }
     }
 
-    Collections.sort(list1);
-    Collections.sort(list2);
+    // 정렬이 꼭 필요 할까?
+//    Collections.sort(list1);
+//    Collections.sort(list2);
 
     // 다중집합 고려해주기
     // 교집합
